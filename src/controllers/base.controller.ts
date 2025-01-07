@@ -17,7 +17,7 @@ export class UserController {
 
   @Get('/get')
   public getUser() {
-    throw new Error('asdsad')
+    // throw new Error('asdsad')
 
     return responseService.success(new Date().toString())
   }
