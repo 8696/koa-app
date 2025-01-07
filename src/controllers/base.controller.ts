@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Ctx } from 'routing-controllers'
 import { IsString, Length } from 'class-validator'
 import { responseService } from '../service'
-import { Context } from 'koa';
+import { Context } from 'koa'
 
 class CreateUserRequest {
   @IsString()
