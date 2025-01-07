@@ -5,58 +5,29 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>admin.icode.link</title>
+    <title></title>
     <link rel="stylesheet" href="app.css">
 </head>
 <body>
-<div>admin.icode.link</div>
 <button id="save">save</button>
 <button id="get">get</button>
 </body>
-<script src="./md5.js"></script>
 <script>
-  function randomString(e = 32) {
-    const t = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890'
-    const a = t.length
-    let n = '';
-    for (let i = 0; i < e; i++) n += t.charAt(Math.floor(Math.random() * a));
-    return n
-  }
-
-  const sign = (requestId, time) => {
-    time = time.toString()
-    requestId =
-      requestId
-        .toLowerCase()
-        .replace(new RegExp(requestId[requestId.length - 1], 'gi'), time)
-        .replace(new RegExp(time[time.length - 1], 'gi'), requestId)
-        .repeat(+time[time.length - 1] || 1)
-    return md5(requestId)
-  }
-
 
   const req = (path) => {
-    const time = new Date().getTime()
-    const requestId = randomString()
-    fetch(path, {
-      headers: {
-        'Request-id': requestId,
-        'Request-time': time,
-        'Request-sign': sign(requestId, time)
-      }
-    })
+    fetch(path)
       .then(res => res.json())
       .then(console.log)
   }
 
   document.querySelector('#save').addEventListener('click', () => {
     for (let i = 0; i < 1; i++) {
-      req('http://10.88.88.101:8091/api/users/a')
+      req('/api/base/get')
     }
   })
   document.querySelector('#get').addEventListener('click', () => {
     for (let i = 0; i < 1; i++) {
-      req('http://127.0.0.1:8091/base/server/get')
+      req('/api/base/post')
     }
   })
 </script>

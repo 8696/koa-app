@@ -9,10 +9,8 @@ import { IS_FEATURE_PRODUCTION } from '../config'
 @Middleware({ type: 'before', priority: 100 })
 export default class ApiErrorMiddleware implements KoaMiddlewareInterface {
   async use(context: Context, next: () => Promise<void>): Promise<void> {
-    console.log('api.error.middleware.start')
     try {
       await next()
-      console.log('api.error.middleware.end')
       // 非 200 状态码
       const httpStatus = context.status.toString()
       if (!/^2\d{2}$/.test(httpStatus)) {
