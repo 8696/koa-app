@@ -1,6 +1,7 @@
-import { Controller, Get, Post, Body } from 'routing-controllers'
+import { Controller, Get, Post, Body, Ctx } from 'routing-controllers'
 import { IsString, Length } from 'class-validator'
 import { responseService } from '../service'
+import { Context } from 'koa';
 
 class CreateUserRequest {
   @IsString()
@@ -18,6 +19,18 @@ export class UserController {
   @Get('/get')
   public getUser() {
     // throw new Error('asdsad')
+
+    return responseService.success(new Date().toString())
+  }
+  @Post('/post')
+  public postUser(@Ctx() ctx: Context) {
+    // throw new Error('asdsad')
+    ctx.cookies.set('token', Math.random().toString(), {
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000,
+      sameSite: 'none',
+      secure: true
+    })
 
     return responseService.success(new Date().toString())
   }
